@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strange Grooves Podcast</title>
+<meta name="description" content="Strange Grooves Podcast. Interviews with musicians, vinyl collectors, and music lovers. We dig into life's deep cuts. Hosted by Cait Milberry and Cherise Letson.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #15100c;
+    --surface: #1e1711;
+    --surface-2: #281f17;
+    --text: #f6ede0;
+    --muted: #b8a68f;
+    --faint: #8a7a66;
+    --accent: #e9a13c;
+    --accent-ink: #1a1206;
+    --rust: #c7482f;
+    --border: rgba(246, 237, 224, 0.10);
+    --border-strong: rgba(246, 237, 224, 0.18);
+    --maxw: 1140px;
+    --radius: 16px;
+    --shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .display {
+    font-family: "Anton", "DM Sans", sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.02;
+    text-transform: uppercase;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .wrap {
+    width: 100%;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .accent { color: var(--accent); }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+    white-space: nowrap;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); }
+  .btn-primary:hover { background: #f4b254; }
+  .btn-ghost { background: transparent; color: var(--text); border-color: var(--border-strong); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .btn svg { width: 18px; height: 18px; }
+
+  /* Header */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(21, 16, 12, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 76px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .brand .disc {
+    width: 34px; height: 34px;
+    flex: none;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, var(--accent) 0 18%, #0d0a07 19% 30%, var(--accent) 31% 34%, #0d0a07 35%);
+    border: 1px solid var(--border-strong);
+  }
+  .brand .name {
+    font-family: "Anton", sans-serif;
+    font-size: 21px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .brand .name small {
+    display: block;
+    font-family: "DM Sans", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.42em;
+    color: var(--faint);
+    font-weight: 700;
+    margin-top: 3px;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+  .nav-links a.lnk {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--muted);
+    transition: color 0.2s ease;
+  }
+  .nav-links a.lnk:hover { color: var(--text); }
+  .nav-actions { display: flex; align-items: center; gap: 14px; }
+  .menu-toggle {
+    display: none;
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    border-radius: 10px;
+    padding: 9px 11px;
+    cursor: pointer;
+    color: var(--text);
+  }
+  .menu-toggle svg { width: 20px; height: 20px; display: block; }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    padding: 84px 0 72px;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -220px; right: -180px;
+    width: 640px; height: 640px;
+    background: radial-gradient(circle, rgba(233, 161, 60, 0.16), transparent 62%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 22px;
+  }
+  .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--rust); }
+  .hero h1 {
+    font-size: clamp(44px, 6.6vw, 82px);
+  }
+  .hero h1 .line2 { color: var(--accent); }
+  .hero p.lede {
+    font-size: 19px;
+    color: var(--muted);
+    max-width: 30em;
+    margin: 24px 0 14px;
+  }
+  .hosted {
+    font-size: 14px;
+    color: var(--faint);
+    margin-bottom: 30px;
+    letter-spacing: 0.02em;
+  }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; }
+
+  /* Record art */
+  .record-stage {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 360px;
+  }
+  .record {
+    width: min(360px, 78vw);
+    aspect-ratio: 1;
+    animation: spin 14s linear infinite;
+    filter: drop-shadow(0 30px 50px rgba(0,0,0,0.55));
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) {
+    .record { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+  .stat-badge {
+    position: absolute;
+    bottom: 8px; left: -6px;
+    background: var(--surface-2);
+    border: 1px solid var(--border-strong);
+    border-radius: 14px;
+    padding: 14px 18px;
+    box-shadow: var(--shadow);
+  }
+  .stat-badge b {
+    font-family: "Anton", sans-serif;
+    font-size: 28px;
+    color: var(--accent);
+    display: block;
+    line-height: 1;
+  }
+  .stat-badge span {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Section scaffolding */
+  section { padding: 76px 0; }
+  .section-head { margin-bottom: 40px; }
+  .section-head .kicker {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .section-head h2 { font-size: clamp(30px, 4.4vw, 48px); }
+  .section-head p { color: var(--muted); max-width: 46em; margin-top: 14px; }
+
+  /* Featured */
+  .featured {
+    background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .featured-card {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 40px;
+    align-items: center;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 34px;
+    box-shadow: var(--shadow);
+  }
+  .cover {
+    aspect-ratio: 1;
+    border-radius: 12px;
+    background:
+      radial-gradient(circle at 70% 28%, rgba(233,161,60,0.35), transparent 50%),
+      linear-gradient(135deg, #2d2117, #130d08);
+    border: 1px solid var(--border-strong);
+    display: grid;
+    place-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover .mini-disc {
+    width: 58%; aspect-ratio: 1; border-radius: 50%;
+    background: repeating-radial-gradient(circle at center, #0c0906 0 3px, #1a130d 3px 6px);
+    border: 4px solid #0c0906;
+    position: relative;
+  }
+  .cover .mini-disc::after {
+    content: ""; position: absolute; inset: 40%;
+    border-radius: 50%; background: var(--rust);
+  }
+  .cover .epnum {
+    position: absolute; top: 14px; left: 14px;
+    font-family: "Anton", sans-serif;
+    font-size: 14px; letter-spacing: 0.1em;
+    color: var(--accent);
+    background: rgba(12,9,6,0.7);
+    padding: 5px 10px; border-radius: 8px;
+  }
+  .featured-body .tag {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--rust); margin-bottom: 14px;
+  }
+  .featured-body h3 { font-size: clamp(24px, 3.4vw, 36px); margin-bottom: 14px; }
+  .featured-body p { color: var(--muted); margin-bottom: 26px; max-width: 40em; }
+  .featured-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+  /* Episodes grid */
+  .ep-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  .ep-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 0.18s ease, border-color 0.2s ease;
+  }
+  .ep-card:hover { transform: translateY(-4px); border-color: var(--border-strong); }
+  .ep-card .vol {
+    font-family: "Anton", sans-serif;
+    font-size: 13px; letter-spacing: 0.12em;
+    color: var(--accent);
+  }
+  .ep-card h3 {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 19px;
+    line-height: 1.3;
+    letter-spacing: 0;
+  }
+  .ep-card .meta { font-size: 14px; color: var(--faint); margin-top: auto; }
+  .ep-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-weight: 700; font-size: 15px; color: var(--accent);
+    transition: gap 0.18s ease;
+  }
+  .ep-link:hover { gap: 12px; }
+  .ep-link svg { width: 16px; height: 16px; }
+  .grid-cta { text-align: center; margin-top: 40px; }
+
+  /* About */
+  .about { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .about-grid { display: grid; grid-template-columns: 1fr 0.9fr; gap: 56px; align-items: center; }
+  .about-grid p.body { color: var(--muted); margin-bottom: 18px; font-size: 18px; }
+  .hosts { display: grid; gap: 18px; }
+  .host {
+    display: flex; align-items: center; gap: 18px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px;
+  }
+  .host .avatar {
+    width: 58px; height: 58px; flex: none;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: "Anton", sans-serif;
+    font-size: 22px;
+    color: var(--accent-ink);
+    background: linear-gradient(135deg, var(--accent), var(--rust));
+  }
+  .host .who b { display: block; font-size: 18px; }
+  .host .who span { font-size: 13px; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; }
+
+  /* Listen */
+  .platforms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .platform {
+    display: flex; align-items: center; gap: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 24px;
+    transition: transform 0.18s ease, border-color 0.2s ease;
+  }
+  .platform:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .platform .pic {
+    width: 44px; height: 44px; flex: none;
+    border-radius: 12px;
+    display: grid; place-items: center;
+    background: var(--surface-2);
+    border: 1px solid var(--border-strong);
+  }
+  .platform .pic svg { width: 24px; height: 24px; }
+  .platform b { display: block; font-size: 17px; }
+  .platform span { font-size: 13px; color: var(--muted); }
+
+  /* Newsletter */
+  .subscribe {
+    background:
+      radial-gradient(circle at 15% 20%, rgba(199,72,47,0.14), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(233,161,60,0.14), transparent 45%),
+      var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .sub-card {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .sub-card h2 { font-size: clamp(30px, 4.6vw, 50px); }
+  .sub-card p.sub-lede { color: var(--muted); font-size: 18px; margin: 16px auto 30px; max-width: 34em; }
+  .nl-form {
+    display: flex;
+    gap: 12px;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .nl-form input {
+    flex: 1;
+    min-width: 0;
+    background: var(--bg);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 15px 22px;
+    color: var(--text);
+    font-size: 16px;
+    font-family: inherit;
+    transition: border-color 0.2s ease;
+  }
+  .nl-form input::placeholder { color: var(--faint); }
+  .nl-form input:focus { outline: none; border-color: var(--accent); }
+  .nl-form button { flex: none; }
+  .nl-note {
+    font-size: 13px;
+    color: var(--faint);
+    margin-top: 18px;
+  }
+  .nl-success {
+    display: none;
+    margin-top: 22px;
+    background: rgba(233, 161, 60, 0.12);
+    border: 1px solid var(--accent);
+    color: var(--text);
+    border-radius: 14px;
+    padding: 18px 22px;
+    font-weight: 500;
+  }
+  .nl-success b { color: var(--accent); }
+  .nl-form.done { display: none; }
+  .nl-success.show { display: block; }
+
+  /* Support strip */
+  .support-strip {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px; flex-wrap: wrap;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 34px 38px;
+  }
+  .support-strip h3 { font-size: clamp(24px, 3.2vw, 34px); }
+  .support-strip p { color: var(--muted); margin-top: 8px; max-width: 42em; }
+
+  /* Footer */
+  footer {
+    background: #100c08;
+    border-top: 1px solid var(--border);
+    padding: 56px 0 30px;
+  }
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  .foot-brand p { color: var(--muted); margin-top: 16px; max-width: 32em; font-size: 15px; }
+  .foot-col h4 {
+    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--faint); margin-bottom: 16px; font-weight: 700;
+  }
+  .foot-col a { display: block; color: var(--muted); margin-bottom: 11px; font-size: 15px; transition: color 0.2s ease; }
+  .foot-col a:hover { color: var(--accent); }
+  .socials { display: flex; gap: 12px; margin-top: 20px; }
+  .socials a {
+    width: 40px; height: 40px;
+    display: grid; place-items: center;
+    border-radius: 10px;
+    border: 1px solid var(--border-strong);
+    color: var(--muted);
+    transition: color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  }
+  .socials a:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
+  .socials svg { width: 19px; height: 19px; }
+  .foot-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    font-size: 14px;
+    color: var(--faint);
+  }
+  .foot-bottom .strange { font-family: "Anton", sans-serif; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; }
+
+  /* Responsive */
+  @media (max-width: 920px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .record-stage { order: -1; min-height: 300px; }
+    .featured-card { grid-template-columns: 1fr; }
+    .cover { max-width: 300px; }
+    .ep-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-grid { grid-template-columns: 1fr; gap: 36px; }
+    .platforms { grid-template-columns: 1fr; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+    .foot-brand { grid-column: 1 / -1; }
+  }
+  @media (max-width: 680px) {
+    body { font-size: 16px; }
+    .nav-links { display: none; }
+    .menu-toggle { display: inline-flex; }
+    .nav-links.open {
+      display: flex;
+      position: absolute;
+      top: 76px; left: 0; right: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px 24px;
+    }
+    .nav-links.open a.lnk { padding: 10px 0; font-size: 17px; }
+    .nav-links.open .btn { margin-top: 8px; }
+    .ep-grid { grid-template-columns: 1fr; }
+    .nl-form { flex-direction: column; }
+    .nl-form input, .nl-form button { width: 100%; justify-content: center; }
+    section { padding: 56px 0; }
+    .hero { padding: 56px 0; }
+    .support-strip { flex-direction: column; align-items: flex-start; }
+    .foot-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand" aria-label="Strange Grooves Podcast home">
+      <span class="disc" aria-hidden="true"></span>
+      <span class="name">Strange Grooves<small>Podcast</small></span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a class="lnk" href="#featured">Latest</a>
+      <a class="lnk" href="#episodes">Episodes</a>
+      <a class="lnk" href="#about">About</a>
+      <a class="lnk" href="#listen">Listen</a>
+      <a class="lnk" href="#subscribe">Subscribe</a>
+      <a class="btn btn-primary" href="https://www.youtube.com/channel/UC1R4Qpoxj6nbrAK5zgYajvg" target="_blank" rel="noopener">Watch the Show</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="dot"></span> A Music Interview Podcast</span>
+        <h1>We Dig Into<br><span class="line2">Life's Deep Cuts.</span></h1>
+        <p class="lede">Interviews with musicians, vinyl collectors, and music lovers discussing the music they love, life, and what inspires them.</p>
+        <p class="hosted">Hosted by Cait Milberry and Cherise Letson.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#featured">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            Play the Latest Episode
+          </a>
+          <a class="btn btn-ghost" href="#episodes">Browse Episodes</a>
+        </div>
+      </div>
+      <div class="record-stage">
+        <svg class="record" viewBox="0 0 400 400" role="img" aria-label="Spinning vinyl record">
+          <defs>
+            <radialGradient id="vinyl" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#1a130d"/>
+              <stop offset="100%" stop-color="#050402"/>
+            </radialGradient>
+          </defs>
+          <circle cx="200" cy="200" r="198" fill="url(#vinyl)"/>
+          <g stroke="#2a2018" stroke-width="1" fill="none" opacity="0.8">
+            <circle cx="200" cy="200" r="180"/>
+            <circle cx="200" cy="200" r="164"/>
+            <circle cx="200" cy="200" r="148"/>
+            <circle cx="200" cy="200" r="132"/>
+            <circle cx="200" cy="200" r="116"/>
+            <circle cx="200" cy="200" r="100"/>
+          </g>
+          <circle cx="200" cy="200" r="78" fill="#e9a13c"/>
+          <circle cx="200" cy="200" r="78" fill="none" stroke="#1a1206" stroke-width="1.5"/>
+          <text x="200" y="188" text-anchor="middle" font-family="Anton, sans-serif" font-size="22" fill="#1a1206" letter-spacing="1">STRANGE</text>
+          <text x="200" y="214" text-anchor="middle" font-family="Anton, sans-serif" font-size="22" fill="#1a1206" letter-spacing="1">GROOVES</text>
+          <circle cx="200" cy="200" r="7" fill="#050402"/>
+          <circle cx="200" cy="200" r="2.5" fill="#e9a13c"/>
+        </svg>
+        <div class="stat-badge">
+          <b>200+</b>
+          <span>Episodes and counting</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED -->
+  <section class="featured" id="featured">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Latest Episode</div>
+        <h2>Fresh off the turntable</h2>
+      </div>
+      <div class="featured-card">
+        <div class="cover">
+          <span class="epnum">EP 201</span>
+          <span class="mini-disc" aria-hidden="true"></span>
+        </div>
+        <div class="featured-body">
+          <div class="tag">New Release</div>
+          <h3>Episode 201: The Sheepdogs on Vinyl, Rock 'n' Roll &amp; the Stories Behind the Music</h3>
+          <p>Ryan and Ewan of The Sheepdogs sit down to talk vinyl, rock 'n' roll, and the stories behind the music. A deep cut from the Strange Grooves crew.</p>
+          <div class="featured-actions">
+            <a class="btn btn-primary" href="https://www.youtube.com/watch?v=8mRLgyAKqG4" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              Watch Now
+            </a>
+            <a class="btn btn-ghost" href="#episodes">See More Episodes</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EPISODES -->
+  <section id="episodes">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">The Catalogue</div>
+        <h2>Recent Episodes</h2>
+        <p>Conversations with musicians, collectors, and the people who keep music strange. Every link below opens the full episode.</p>
+      </div>
+      <div class="ep-grid">
+
+        <article class="ep-card">
+          <span class="vol">Episode 191</span>
+          <h3>Goin' Out West with Brendan Lyle</h3>
+          <p class="meta">Interview</p>
+          <a class="ep-link" href="https://youtu.be/OGF6wn0Bk2U?si=UR42DrJtTLcFOI6E" target="_blank" rel="noopener">
+            Watch on YouTube
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </article>
+
+        <article class="ep-card">
+          <span class="vol">Volume 190</span>
+          <h3>Canadian Media Royalty &amp; the Legacy of MuchMusic with Bill Welychka</h3>
+          <p class="meta">Interview</p>
+          <a class="ep-link" href="https://www.youtube.com/watch?v=BRMGxo68BtY" target="_blank" rel="noopener">
+            Watch on YouTube
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </article>
+
+        <article class="ep-card">
+          <span class="vol">Episode 181</span>
+          <h3>Catching Up with Clyde Wray, Poet and Voice of Strange Grooves</h3>
+          <p class="meta">Interview</p>
+          <a class="ep-link" href="https://youtu.be/3f9Kvm5AM0Q" target="_blank" rel="noopener">
+            Watch on YouTube
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </article>
+
+        <article class="ep-card">
+          <span class="vol">Volume 180</span>
+          <h3>Bob Dylan &amp; the Outlaw Country Music Festival</h3>
+          <p class="meta">Episode</p>
+          <a class="ep-link" href="https://youtu.be/1KvGZe6n8w4" target="_blank" rel="noopener">
+            Watch on YouTube
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </article>
+
+        <article class="ep-card">
+          <span class="vol">Volume 179</span>
+          <h3>Meet The Orchids, Nova Scotia's Ferocious Two-Piece</h3>
+          <p class="meta">Interview</p>
+          <a class="ep-link" href="https://youtu.be/FkLI7fNcL2U" target="_blank" rel="noopener">
+            Watch on YouTube
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </article>
+
+        <article class="ep-card">
+          <span class="vol">Volume 178</span>
+          <h3>Matt Mays, In the Flesh!</h3>
+          <p class="meta">Interview</p>
+          <a class="ep-link" href="https://www.strangegrooves.com/episodes/volume-178-matt-mays" target="_blank" rel="noopener">
+            Listen Here
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </article>
+
+      </div>
+      <div class="grid-cta">
+        <a class="btn btn-ghost" href="https://www.strangegrooves.com/episodes" target="_blank" rel="noopener">See All Episodes</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="wrap about-grid">
+      <div>
+        <div class="section-head" style="margin-bottom:24px;">
+          <div class="kicker">About the Show</div>
+          <h2>Life's Deep Cuts, One Conversation at a Time</h2>
+        </div>
+        <p class="body">Strange Grooves explores places in rock 'n' roll history and chats with guests, musicians, and people from all walks of life. It is a show about the music we love, the lives behind it, and what keeps us all inspired.</p>
+        <p class="body">From vinyl collectors to touring bands to local legends, every episode digs a little deeper into the records and the stories that stay with us.</p>
+        <a class="btn btn-ghost" href="https://www.strangegrooves.com/about-the-show" target="_blank" rel="noopener" style="margin-top:8px;">Learn More</a>
+      </div>
+      <div class="hosts">
+        <div class="host">
+          <span class="avatar" aria-hidden="true">CM</span>
+          <span class="who"><b>Cait Milberry</b><span>Host</span></span>
+        </div>
+        <div class="host">
+          <span class="avatar" aria-hidden="true">CL</span>
+          <span class="who"><b>Cherise Letson</b><span>Host</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LISTEN -->
+  <section id="listen">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Tune In</div>
+        <h2>Listen and Watch Everywhere</h2>
+        <p>New episodes drop regularly. Catch Strange Grooves on your platform of choice.</p>
+      </div>
+      <div class="platforms">
+        <a class="platform" href="https://www.youtube.com/channel/UC1R4Qpoxj6nbrAK5zgYajvg" target="_blank" rel="noopener">
+          <span class="pic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.5a3 3 0 0 0-2.1-2.1C19 5 12 5 12 5s-7 0-8.9.4A3 3 0 0 0 1 7.5 31 31 0 0 0 .6 12 31 31 0 0 0 1 16.5a3 3 0 0 0 2.1 2.1C5 19 12 19 12 19s7 0 8.9-.4a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .4-4.5 31 31 0 0 0-.4-4.5zM9.8 15.3V8.7l5.7 3.3z"/></svg></span>
+          <span><b>YouTube</b><span>Watch every episode</span></span>
+        </a>
+        <a class="platform" href="https://open.spotify.com/episode/6dopHz9SsOPbfCiyXwuSDj" target="_blank" rel="noopener">
+          <span class="pic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.6 14.4a.75.75 0 0 1-1 .25c-2.8-1.7-6.3-2.1-10.4-1.1a.75.75 0 1 1-.33-1.46c4.5-1 8.4-.6 11.5 1.3a.75.75 0 0 1 .25 1zm1.2-2.7a.94.94 0 0 1-1.3.31c-3.2-2-8.1-2.5-11.9-1.35a.94.94 0 1 1-.54-1.8c4.3-1.3 9.7-.73 13.4 1.53a.94.94 0 0 1 .31 1.3zm.1-2.8C14.4 8.6 8 8.4 4.7 9.4a1.12 1.12 0 1 1-.65-2.15C7.9 6.1 15 6.33 19.1 8.75a1.12 1.12 0 0 1-1.16 1.92z"/></svg></span>
+          <span><b>Spotify</b><span>Stream on the go</span></span>
+        </a>
+        <a class="platform" href="https://www.strangegrooves.com/subscribe" target="_blank" rel="noopener">
+          <span class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+          <span><b>Apple Podcasts and more</b><span>Find every way to listen</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBSCRIBE / NEWSLETTER -->
+  <section class="subscribe" id="subscribe">
+    <div class="wrap">
+      <div class="sub-card">
+        <div class="kicker" style="color:var(--accent);font-size:12px;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;margin-bottom:12px;">Join the Crew</div>
+        <h2>Subscribe to Our Newsletter</h2>
+        <p class="sub-lede">Get new episodes, guest announcements, and cool and strange things from the world of Strange Grooves, straight to your inbox.</p>
+        <form class="nl-form" id="nlForm" novalidate>
+          <label for="nlEmail" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Email Address</label>
+          <input type="email" id="nlEmail" name="email" placeholder="Your email address" required autocomplete="email">
+          <button class="btn btn-primary" type="submit">Subscribe</button>
+        </form>
+        <div class="nl-success" id="nlSuccess"><b>Thank you!</b> You are on the list. Keep it strange.</div>
+        <p class="nl-note">We respect your privacy and will only send you cool and strange things.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUPPORT -->
+  <section>
+    <div class="wrap">
+      <div class="support-strip">
+        <div>
+          <h3>Support the Show</h3>
+          <p>Strange Grooves runs on the love of music and the people who listen. Become a patron, subscribe, and help us keep digging into life's deep cuts.</p>
+        </div>
+        <a class="btn btn-primary" href="https://www.strangegrooves.com/subscribe" target="_blank" rel="noopener">Support &amp; Subscribe</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="brand" aria-label="Strange Grooves Podcast home">
+          <span class="disc" aria-hidden="true"></span>
+          <span class="name">Strange Grooves<small>Podcast</small></span>
+        </a>
+        <p>Interviews with musicians, vinyl collectors, and music lovers discussing the music they love, life, and what inspires them.</p>
+        <div class="socials">
+          <a href="https://www.youtube.com/channel/UC1R4Qpoxj6nbrAK5zgYajvg" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.5a3 3 0 0 0-2.1-2.1C19 5 12 5 12 5s-7 0-8.9.4A3 3 0 0 0 1 7.5 31 31 0 0 0 .6 12 31 31 0 0 0 1 16.5a3 3 0 0 0 2.1 2.1C5 19 12 19 12 19s7 0 8.9-.4a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .4-4.5 31 31 0 0 0-.4-4.5zM9.8 15.3V8.7l5.7 3.3z"/></svg>
+          </a>
+          <a href="https://twitter.com/StrangeGrooves" target="_blank" rel="noopener" aria-label="Twitter">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-6.9 7.9L23 22h-6.3l-5-6.5L6 22H3l7.4-8.5L2 2h6.4l4.5 6zM17.8 20h1.7L7.3 3.9H5.5z"/></svg>
+          </a>
+          <a href="https://www.strangegrooves.com" target="_blank" rel="noopener" aria-label="Website">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Explore</h4>
+        <a href="#featured">Latest Episode</a>
+        <a href="#episodes">Episodes</a>
+        <a href="#about">About the Show</a>
+        <a href="https://www.strangegrooves.com/strangecrew" target="_blank" rel="noopener">Strange Crew</a>
+        <a href="https://www.strangegrooves.com/epk" target="_blank" rel="noopener">EPK</a>
+      </div>
+      <div class="foot-col">
+        <h4>Listen</h4>
+        <a href="https://www.youtube.com/channel/UC1R4Qpoxj6nbrAK5zgYajvg" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://open.spotify.com/episode/6dopHz9SsOPbfCiyXwuSDj" target="_blank" rel="noopener">Spotify</a>
+        <a href="https://www.strangegrooves.com/subscribe" target="_blank" rel="noopener">All Platforms</a>
+        <a href="#subscribe">Newsletter</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span class="strange">Keeping It Strange Always.</span>
+      <span>Copyright 2026 Strange Grooves Podcast. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mobile menu toggle
+    var toggle = document.getElementById('menuToggle');
+    var links = document.getElementById('navLinks');
+    if (toggle && links) {
+      toggle.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      links.addEventListener('click', function (e) {
+        if (e.target.classList.contains('lnk')) {
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
+    // Newsletter capture. On a live deploy this posts to the mailing provider.
+    var form = document.getElementById('nlForm');
+    var success = document.getElementById('nlSuccess');
+    if (form && success) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var email = document.getElementById('nlEmail');
+        var val = (email.value || '').trim();
+        var ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+        if (!ok) {
+          email.focus();
+          email.style.borderColor = 'var(--rust)';
+          return;
+        }
+        form.classList.add('done');
+        success.classList.add('show');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
